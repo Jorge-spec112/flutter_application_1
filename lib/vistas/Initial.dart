@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/vistas/bloc/home_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Initial extends StatelessWidget {
-  const Initial({super.key});
-
+class InitialView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(body: Column(children: [Text('Pagina inicial')])),
+      home: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            context.read<HomeBloc>().add(HomeLoadRequested());
+          },
+          child: Text('Buscar Personaje'),
+        ),
+      ),
     );
   }
 }
