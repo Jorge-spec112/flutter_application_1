@@ -17,7 +17,7 @@ final List<Personaje> tripulacionLuffy = [
     nombre: 'Monkey D. Luffy',
     rol: 'Capitán',
     recompensa: '3,000,000,000 Berries',
-    imagen: 'assets/luffy.png',
+    imagen: 'assets/imagenes/luffy.png',
   ),
   Personaje(
     nombre: 'Roronoa Zoro',
