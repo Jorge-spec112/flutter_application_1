@@ -1,4 +1,4 @@
-part of 'home_bloc.dart';
+import 'package:equatable/equatable.dart' show Equatable;
 
 sealed class HomeEvent extends Equatable {
   const HomeEvent();
@@ -8,5 +8,3 @@ sealed class HomeEvent extends Equatable {
 }
 
 final class HomeSearchPressed extends HomeEvent {}
-
-final class HomeLoadRequested extends HomeEvent {}
