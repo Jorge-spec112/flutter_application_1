@@ -11,7 +11,7 @@ class SuccessOnePiece extends StatelessWidget {
       backgroundColor: Colors.red[50],
       appBar: AppBar(
         title: const Text('Tripulación de Luffy'),
-        backgroundColor: Colors.red[500],
+        backgroundColor: Colors.red[800],
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(10),
