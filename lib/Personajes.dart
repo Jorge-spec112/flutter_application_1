@@ -73,11 +73,4 @@ final List<Personaje> tripulacionLuffy = [
     imagen: 'assets/imagenes/jinbe.png',
     recompensa: '1,100,000,000 Berries',
   ),
-  Personaje(
-    nombre: 'Thousand Sunny',
-    rol: 'Barco de la tripulación',
-    imagen:
-        'assets/imagenes/sunny.png', // Asegúrate de tener esta imagen en assets
-    recompensa: '', // No tiene recompensa
-  ),
 ];
