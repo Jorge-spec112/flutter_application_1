@@ -1,73 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Personajes.dart';
+import 'package:flutter_application_1/Personajes.dart'; // Asegúrate de importar bien
 
 class SuccessOnePiece extends StatelessWidget {
-  final List<Personaje> personajes;
-
-  const SuccessOnePiece({Key? key, required this.personajes}) : super(key: key);
+  const SuccessOnePiece({Key? key, required List<Personaje> personajes})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.red[50],
       appBar: AppBar(
-        title: Text('Tripulación de Luffy'),
-        backgroundColor: Colors.red[1000],
+        title: const Text('Tripulación de Luffy'),
+        backgroundColor: Colors.red[500],
       ),
       body: GridView.builder(
-        padding: EdgeInsets.all(10),
-        itemCount: personajes.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+        padding: const EdgeInsets.all(10),
+        itemCount: tripulacionLuffy.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // 2 columnas
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
-          childAspectRatio: 0.65, // Más alto para mostrar mejor la imagen
+          childAspectRatio: 0.7,
         ),
         itemBuilder: (context, index) {
-          final p = personajes[index];
+          final personaje = tripulacionLuffy[index];
           return Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
-            elevation: 5,
+            elevation: 4,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  flex: 3,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.vertical(
+                    borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(12),
                     ),
                     child: Image.asset(
-                      p.imagen,
+                      personaje.imagen,
                       fit: BoxFit.cover,
                       width: double.infinity,
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          p.nombre,
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    children: [
+                      Text(
+                        personaje.nombre,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
                         ),
-                        Text(p.rol),
-                        Text(
-                          p.recompensa,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey[700],
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(personaje.rol, style: const TextStyle(fontSize: 12)),
+                      Text(
+                        personaje.recompensa,
+                        style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                      ),
+                    ],
                   ),
                 ),
               ],
