@@ -22,7 +22,7 @@ class _InitialViewState extends State<InitialView>
     // 👇 Controlador para animación flotante
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 5),
     )..repeat(reverse: true);
 
     _animation = Tween<double>(
