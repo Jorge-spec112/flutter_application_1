@@ -1,46 +1,109 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Personajes.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class TripulacionView extends StatelessWidget {
+  const TripulacionView({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Tripulación de Luffy',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.brown, // color estilo barco
+        centerTitle: true,
+      ),
+      body: GridView.builder(
+        padding: const EdgeInsets.all(12.0),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // 2 columnas
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          childAspectRatio: 0.75,
+        ),
+        itemCount: tripulacionLuffy.length,
+        itemBuilder: (context, index) {
+          final personaje = tripulacionLuffy[index];
+
+          // Si es Sunny, usa el widget animado
+          final bool esSunny = personaje.nombre.toLowerCase().contains('sunny');
+
+          return Card(
+            color: Colors.pink[50],
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(12),
+                    ),
+                    child: esSunny
+                        ? AnimatedImageZoom(imagePath: personaje.imagen)
+                        : Image.asset(
+                            personaje.imagen,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          ),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  personaje.nombre,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                Text(personaje.rol, textAlign: TextAlign.center),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Text(
+                    personaje.recompensa,
+                    style: const TextStyle(fontSize: 12),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
 }
 
-class _HomePageState extends State<HomePage>
+class AnimatedImageZoom extends StatefulWidget {
+  final String imagePath;
+
+  const AnimatedImageZoom({required this.imagePath, Key? key})
+    : super(key: key);
+
+  @override
+  State<AnimatedImageZoom> createState() => _AnimatedImageZoomState();
+}
+
+class _AnimatedImageZoomState extends State<AnimatedImageZoom>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<Offset> _textAnimation;
-  late Animation<double> _buttonScaleAnimation;
-  late Animation<Offset> _backgroundAnimation;
+  late final AnimationController _controller;
+  late final Animation<double> _animationScale;
 
   @override
   void initState() {
     super.initState();
-
     _controller = AnimationController(
-      duration: const Duration(seconds: 6),
       vsync: this,
+      duration: const Duration(seconds: 3),
     )..repeat(reverse: true);
 
-    _textAnimation = Tween<Offset>(
-      begin: const Offset(0, -0.02),
-      end: const Offset(0, 0.02),
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-
-    _buttonScaleAnimation = Tween<double>(
+    _animationScale = Tween<double>(
       begin: 1.0,
-      end: 1.05,
+      end: 1.08,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-
-    // Movimiento diagonal suave (efecto de oleaje)
-    _backgroundAnimation =
-        Tween<Offset>(
-          begin: const Offset(-0.01, -0.01),
-          end: const Offset(0.01, 0.01),
-        ).animate(
-          CurvedAnimation(parent: _controller, curve: Curves.easeInOutSine),
-        );
   }
 
   @override
@@ -51,73 +114,12 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Imagen de fondo animada en diagonal
-          SlideTransition(
-            position: _backgroundAnimation,
-            child: SizedBox.expand(
-              child: Image.asset(
-                'assets/imagenes/sunny.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-
-          // Texto y botón animados
-          Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SlideTransition(
-                  position: _textAnimation,
-                  child: Text(
-                    '¡Bienvenido a la Tripulación del Sombrero de Paja!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      shadows: [
-                        Shadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 4,
-                          color: Colors.black.withOpacity(0.7),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                ScaleTransition(
-                  scale: _buttonScaleAnimation,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.black.withOpacity(0.6),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 12,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      elevation: 6,
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/tripulacion');
-                    },
-                    child: const Text(
-                      'Ver Tripulación',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+    return ScaleTransition(
+      scale: _animationScale,
+      child: Image.asset(
+        widget.imagePath,
+        fit: BoxFit.cover,
+        width: double.infinity,
       ),
     );
   }
