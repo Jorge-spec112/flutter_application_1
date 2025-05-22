@@ -56,6 +56,8 @@ dev_dependencies:
 flutter:
   assets:
     - assets/imagenes/
+    - assets/imagenes/sunny.png
+
     
 
     

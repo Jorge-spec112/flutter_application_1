@@ -1,35 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Personajes.dart';
+import 'package:flutter_application_1/home-page.dart';
 import 'package:flutter_application_1/vistas/succes.dart';
+// O la pantalla de tripulación
+import 'Personajes.dart'; // Donde está la lista
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(title: 'One Piece App', home: Inicio());
-  }
+void main() {
+  runApp(const MyApp());
 }
 
-class Inicio extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Tripulación de Luffy')),
-      body: Center(
-        child: ElevatedButton(
-          child: Text('Ver Tripulación'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    SuccessOnePiece(personajes: tripulacionLuffy),
-              ),
-            );
-          },
-        ),
-      ),
+    return MaterialApp(
+      title: 'One Piece App',
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/tripulacion': (context) =>
+            SuccessOnePiece(personajes: tripulacionLuffy),
+      },
     );
   }
 }
