@@ -7,7 +7,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
     on<HomeLoadRequested>((event, emit) async {
       emit(HomeLoadInProgress());
-      await Future.delayed(Duration(seconds: 1)); // Simula carga
+      await Future.delayed(Duration(seconds: 3)); // Simula carga
       emit(HomeLoadSuccess(personajes: tripulacionLuffy));
     });
   }
