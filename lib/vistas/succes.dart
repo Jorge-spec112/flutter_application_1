@@ -13,17 +13,31 @@ class SuccessView extends StatelessWidget {
         title: Text("Tripulación de Luffy"),
         backgroundColor: Colors.red.shade700,
       ),
-      body: ListView.builder(
+      body: GridView.builder(
+        padding: EdgeInsets.all(8),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // 2 columnas
+          childAspectRatio: 3 / 4, // ancho / alto de cada item
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+        ),
         itemCount: personajes.length,
         itemBuilder: (context, index) {
           final personaje = personajes[index];
           return Card(
             color: Colors.blue.shade50,
-            margin: EdgeInsets.all(8),
-            child: ListTile(
-              leading: Image.asset(personaje.imagen, width: 50),
-              title: Text(personaje.nombre),
-              subtitle: Text("${personaje.rol} - ${personaje.recompensa}"),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(personaje.imagen, width: 90),
+                SizedBox(height: 8),
+                Text(
+                  personaje.nombre,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text("${personaje.rol}"),
+                Text("${personaje.recompensa}"),
+              ],
             ),
           );
         },
