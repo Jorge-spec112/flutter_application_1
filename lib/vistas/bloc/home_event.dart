@@ -1,3 +1,8 @@
-abstract class HomeEvent {}
+import 'package:equatable/equatable.dart';
 
-class HomeLoadRequested extends HomeEvent {}
+sealed class HomeEvent extends Equatable {
+  @override
+  List<Object> get props => [];
+}
+
+class HomeSearchPressed extends HomeEvent {}

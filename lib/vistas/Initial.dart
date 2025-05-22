@@ -36,7 +36,7 @@ class _InitialViewState extends State<InitialView>
   }
 
   void _verTripulacion() {
-    context.read<HomeBloc>().add(HomeLoadRequested());
+    context.read<HomeBloc>().add(HomeSearchPressed());
     Navigator.pushNamed(context, '/tripulacion');
   }
 
