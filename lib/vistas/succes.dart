@@ -29,7 +29,7 @@ class SuccessView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(personaje.imagen, width: 90),
+                Image.asset(personaje.imagen, width: 150),
                 SizedBox(height: 8),
                 Text(
                   personaje.nombre,

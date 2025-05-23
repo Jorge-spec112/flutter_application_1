@@ -47,7 +47,7 @@ final List<Personaje> tripulacionLuffy = [
     nombre: 'Tony Tony Chopper',
     rol: 'Doctor',
     recompensa: '1,000 Berries',
-    imagen: 'assets/imagenes/chopper.png',
+    imagen: 'assets/imagenes/choper.png',
   ),
   Personaje(
     nombre: 'Nico Robin',
